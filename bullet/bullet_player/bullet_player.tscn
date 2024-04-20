@@ -3,3 +3,4 @@
 [ext_resource type="PackedScene" uid="uid://cyfitpykf354m" path="res://bullet/bullet_base/bullet_base.tscn" id="1_0pc6j"]
 
 [node name="BulletPlayer" instance=ExtResource("1_0pc6j")]
+collision_layer = 8

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cnx6s682x3pv0" path="res://assets/items/bullet2.png" id="2_arom2"]
 
 [node name="BulletEnemy" instance=ExtResource("1_5tnmu")]
+collision_layer = 16
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_arom2")

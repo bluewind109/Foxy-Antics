@@ -6,6 +6,7 @@ class_name Player
 @onready var animation_player = $AnimationPlayer
 @onready var debug_label = $DebugLabel
 @onready var sound_player = $SoundPlayer
+@onready var shooter = $Shooter
 
 const GRAVITY: float = 1000.0
 const RUN_SPEED: float = 120.0
@@ -30,13 +31,8 @@ func _physics_process(delta):
 	update_debug_label()
 
 	if (Input.is_action_just_pressed("shoot") == true):
-		ObjectMaker.create_bullet(
-			50.0, 
-			Vector2.RIGHT, 
-			global_position, 
-			20.0, 
-			ObjectMaker.BULLET_KEY.PLAYER
-		)
+		shoot()
+		
 
 func update_debug_label() -> void:
 	debug_label.text = "floor: %s\n%s\n%.0f, %.0f " % [
@@ -45,6 +41,12 @@ func update_debug_label() -> void:
 		velocity.x, velocity.y
 	]
 
+
+func shoot() -> void:
+	if (sprite_2d.flip_h == true):
+		shooter.shoot(Vector2.LEFT)
+	else:
+		shooter.shoot(Vector2.RIGHT)
 
 func get_input() -> void:
 	velocity.x = 0

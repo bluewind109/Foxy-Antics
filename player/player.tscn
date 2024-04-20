@@ -131,3 +131,17 @@ libraries = {
 "": SubResource("AnimationLibrary_3gbm6")
 }
 autoplay = "idle"
+
+[node name="DebugLabel" type="Label" parent="."]
+offset_left = -10.0
+offset_top = -28.0
+offset_right = 72.0
+offset_bottom = 179.0
+scale = Vector2(0.254064, 0.103759)
+theme_override_font_sizes/font_size = 48
+text = "abc
+abc
+abc"
+vertical_alignment = 1
+
+[node name="SoundPlayer" type="AudioStreamPlayer2D" parent="."]

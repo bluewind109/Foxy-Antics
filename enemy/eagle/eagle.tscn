@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://dk5dbxmyuf160"]
+
+[ext_resource type="PackedScene" uid="uid://cjk8xyww4jayk" path="res://enemy/enemy_base/enemy_base.tscn" id="1_5ajdr"]
+[ext_resource type="Texture2D" uid="uid://e7x58qhre0oe" path="res://assets/enemies/eagle/eagle-attack.png" id="2_dfh0q"]
+[ext_resource type="Script" path="res://enemy/eagle/eagle.gd" id="2_g48g6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qouet"]
+atlas = ExtResource("2_dfh0q")
+region = Rect2(0, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oclb3"]
+atlas = ExtResource("2_dfh0q")
+region = Rect2(40, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6xqp"]
+atlas = ExtResource("2_dfh0q")
+region = Rect2(80, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gypy"]
+atlas = ExtResource("2_dfh0q")
+region = Rect2(120, 0, 40, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_58qmc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qouet")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oclb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6xqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gypy")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8cax"]
+radius = 7.07107
+
+[node name="Eagle" instance=ExtResource("1_5ajdr")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_g48g6")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_58qmc")
+animation = &"fly"
+frame = 1
+frame_progress = 0.413231
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_m8cax")
+
+[node name="PlayerDetector" type="RayCast2D" parent="." index="3"]
+target_position = Vector2(0, 200)
+
+[node name="DirectionTimer" type="Timer" parent="." index="4"]
+wait_time = 3.0

@@ -88,4 +88,6 @@ func set_state(new_state: PLAYER_STATE) -> void:
 		PLAYER_STATE.FALL:
 			animation_player.play("fall")
 			
-	
+
+func _on_hit_box_area_entered(area):
+	print("player hit: ", area)

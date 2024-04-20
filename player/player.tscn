@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bfsovpbkbd7p1"]
+[gd_scene load_steps=12 format=3 uid="uid://bfsovpbkbd7p1"]
 
 [ext_resource type="Texture2D" uid="uid://m6fkq4hmxh1i" path="res://assets/player/player.png" id="1_0dmxn"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_afi6f"]
@@ -114,6 +114,10 @@ _data = {
 "run": SubResource("Animation_3hn8t")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_likfi"]
+radius = 6.0
+height = 18.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
 script = ExtResource("1_afi6f")
@@ -124,7 +128,7 @@ hframes = 19
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 6)
+position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_py1qy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -146,3 +150,13 @@ abc"
 vertical_alignment = 1
 
 [node name="SoundPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_likfi")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

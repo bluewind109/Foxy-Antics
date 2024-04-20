@@ -3,6 +3,7 @@ extends EnemyBase
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var player_detector = $PlayerDetector
 @onready var direction_timer = $DirectionTimer
+@onready var shooter = $Shooter
 
 const FLY_SPEED: Vector2 = Vector2(35, 15)
 
@@ -13,7 +14,14 @@ func _physics_process(delta):
 	super._physics_process(delta)	
 	velocity = _fly_direction
 	move_and_slide()
+	shoot()
 	
+func shoot() -> void:
+	if (player_detector.is_colliding() == true):
+		shooter.shoot(
+			global_position.direction_to(_player_ref.global_position)
+		)
+
 
 func set_and_flip() -> void:
 	var x_dir = sign(_player_ref.global_position.x - global_position.x)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqoeu7pr1xvmm"]
+[gd_scene load_steps=8 format=3 uid="uid://cqoeu7pr1xvmm"]
 
 [ext_resource type="Texture2D" uid="uid://ehxev7ut3l5n" path="res://assets/tiles/Terrain (16x16).png" id="1_2dfj2"]
 [ext_resource type="Script" path="res://level_base/level_base.gd" id="1_5128b"]
 [ext_resource type="PackedScene" uid="uid://bvtndiildrdct" path="res://player_camera/player_camera.tscn" id="2_mp0i7"]
 [ext_resource type="PackedScene" uid="uid://bfsovpbkbd7p1" path="res://player/player.tscn" id="3_r1jgr"]
+[ext_resource type="PackedScene" uid="uid://cjsg5236f3qek" path="res://moving_platform/moving_platform.tscn" id="5_n1ylw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ow75y"]
 texture = ExtResource("1_2dfj2")
@@ -575,4 +576,17 @@ position = Vector2(255, -150)
 zoom = Vector2(2, 2)
 
 [node name="Player" parent="." instance=ExtResource("3_r1jgr")]
-position = Vector2(80, -48)
+position = Vector2(111, -46)
+
+[node name="MovingPlatform" parent="." node_paths=PackedStringArray("p1", "p2") instance=ExtResource("5_n1ylw")]
+position = Vector2(50, -40)
+p1 = NodePath("../Markers/MP1_2")
+p2 = NodePath("../Markers/MP1_1")
+
+[node name="Markers" type="Node" parent="."]
+
+[node name="MP1_1" type="Marker2D" parent="Markers"]
+position = Vector2(177, -42)
+
+[node name="MP1_2" type="Marker2D" parent="Markers"]
+position = Vector2(50, -140)

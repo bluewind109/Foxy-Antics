@@ -4,7 +4,7 @@ extends Area2D
 
 const FRUITS: Array = ["banana", "cherry", "kiwi", "melon"]
 const GRAVITY: float = 2400.0
-const JUMP: float = -150.0
+const JUMP: float = -300.0
 const POINTS: int = 2
 
 var _start_y: float
@@ -39,4 +39,5 @@ func _on_life_timer_timeout():
 
 
 func _on_area_entered(area):
-	pass # Replace with function body.
+	SignalManager.on_pickup_hit.emit(POINTS)
+	kill_me()

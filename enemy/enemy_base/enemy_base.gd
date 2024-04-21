@@ -31,7 +31,8 @@ func die() -> void:
 	
 	_dying = true
 	SignalManager.on_enemy_hit.emit(points, global_position)
-	ObjectMaker.create_explosion(global_position)
+	ObjectMaker.create_simple_scene(global_position, ObjectMaker.SCENE_KEYS.EXPLOSION)
+	ObjectMaker.create_simple_scene(global_position, ObjectMaker.SCENE_KEYS.PICKUP)
 	set_physics_process(false)
 	hide()
 	queue_free()

@@ -1,13 +1,17 @@
 extends Node
 
 enum BULLET_KEY { PLAYER, ENEMY }
+enum SCENE_KEYS { EXPLOSION, PICKUP }
 
 const BULLETS = {
 	BULLET_KEY.PLAYER: preload("res://bullet/bullet_player/bullet_player.tscn"),
 	BULLET_KEY.ENEMY: preload("res://bullet/bullet_enemy/bullet_enemy.tscn")
 }
 
-const explosion_scene: PackedScene = preload("res://enemy_explosion/enemy_explosion.tscn")
+const SIMPLE_SCENES = {
+	SCENE_KEYS.EXPLOSION: preload("res://enemy_explosion/enemy_explosion.tscn"),
+	SCENE_KEYS.PICKUP: preload("res://fruit_pickup/fruit_pick_up.tscn")
+}
 
 
 func add_child_deferred(child_to_add) -> void:
@@ -31,7 +35,7 @@ func create_bullet(
 	call_add_child(new_bullet)
 
 
-func create_explosion(start_pos: Vector2) -> void:
-	var new_explosion = explosion_scene.instantiate()
-	new_explosion.global_position = start_pos
-	call_add_child(new_explosion)
+func create_simple_scene(start_pos: Vector2, key: SCENE_KEYS) -> void:
+	var new_sc = SIMPLE_SCENES[key].instantiate()
+	new_sc.global_position = start_pos
+	call_add_child(new_sc)

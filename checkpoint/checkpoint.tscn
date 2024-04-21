@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://d2qcedkewr15a"]
+[gd_scene load_steps=16 format=3 uid="uid://d2qcedkewr15a"]
 
 [ext_resource type="Texture2D" uid="uid://3jjl3wyxg73k" path="res://assets/items/checkpoint.png" id="1_6td20"]
+[ext_resource type="Script" path="res://checkpoint/checkpoint.gd" id="1_naw1a"]
 
 [sub_resource type="Animation" id="Animation_cwn4g"]
 resource_name = "appear"
@@ -159,8 +160,11 @@ size = Vector2(20, 45)
 [node name="Checkpoint" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
+monitoring = false
+script = ExtResource("1_naw1a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(13, -32)
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("1_6td20")
 hframes = 26
@@ -181,5 +185,9 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/on_trigger = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(10, 9)
+position = Vector2(23, -23)
 shape = SubResource("RectangleShape2D_3budl")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

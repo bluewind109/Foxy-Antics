@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ubs3fwfejxau"]
+[gd_scene load_steps=25 format=3 uid="uid://ubs3fwfejxau"]
 
 [ext_resource type="Texture2D" uid="uid://l3ybp4okn8mb" path="res://assets/enemies/boss/boss.png" id="1_lmokd"]
 
@@ -48,7 +48,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.01, 0.01)]
+"values": [Vector2(0.5, 0.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -173,13 +173,77 @@ _data = {
 "pulse": SubResource("Animation_oidqw")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vry6f"]
+animation = &"arrive"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3bsrj"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uxq34"]
+animation = &"hit"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l0yje"]
+animation = &"initial_position"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k8gpa"]
+animation = &"pulse"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6mxva"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m2d62"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"on_trigger"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ch40r"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8wjii"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xq4ks"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atfig"]
+advance_mode = 2
+advance_condition = &"on_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_plwkb"]
+advance_mode = 2
+advance_condition = &"on_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sumja"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7r7ui"]
+states/End/position = Vector2(981, 87)
+states/Start/position = Vector2(216, 87)
+states/arrive/node = SubResource("AnimationNodeAnimation_vry6f")
+states/arrive/position = Vector2(540, 87)
+states/attack/node = SubResource("AnimationNodeAnimation_3bsrj")
+states/attack/position = Vector2(873, 10)
+states/hit/node = SubResource("AnimationNodeAnimation_uxq34")
+states/hit/position = Vector2(789, 137)
+states/initial_position/node = SubResource("AnimationNodeAnimation_l0yje")
+states/initial_position/position = Vector2(370, 87)
+states/pulse/node = SubResource("AnimationNodeAnimation_k8gpa")
+states/pulse/position = Vector2(714, 10)
+transitions = ["Start", "initial_position", SubResource("AnimationNodeStateMachineTransition_6mxva"), "initial_position", "arrive", SubResource("AnimationNodeStateMachineTransition_m2d62"), "arrive", "pulse", SubResource("AnimationNodeStateMachineTransition_ch40r"), "pulse", "attack", SubResource("AnimationNodeStateMachineTransition_8wjii"), "attack", "pulse", SubResource("AnimationNodeStateMachineTransition_xq4ks"), "pulse", "hit", SubResource("AnimationNodeStateMachineTransition_atfig"), "attack", "hit", SubResource("AnimationNodeStateMachineTransition_plwkb"), "hit", "pulse", SubResource("AnimationNodeStateMachineTransition_sumja")]
+graph_offset = Vector2(-26, -116)
+
 [node name="Boss" type="Node2D"]
 
 [node name="Visual" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual"]
 position = Vector2(0, -35)
-scale = Vector2(0.01, 0.01)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_lmokd")
 
 [node name="HitBox" type="Area2D" parent="Visual"]
@@ -204,3 +268,12 @@ libraries = {
 "": SubResource("AnimationLibrary_52k70")
 }
 autoplay = "arrive"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_52k70")
+}
+tree_root = SubResource("AnimationNodeStateMachine_7r7ui")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/on_hit = false
+parameters/conditions/on_trigger = false

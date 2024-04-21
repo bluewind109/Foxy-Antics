@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://ubs3fwfejxau"]
+[gd_scene load_steps=26 format=3 uid="uid://ubs3fwfejxau"]
 
 [ext_resource type="Texture2D" uid="uid://l3ybp4okn8mb" path="res://assets/enemies/boss/boss.png" id="1_lmokd"]
+[ext_resource type="Script" path="res://boss/boss.gd" id="1_lw2jc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8jv4"]
 size = Vector2(20, 63)
@@ -122,6 +123,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0.796078, 0, 0.780392, 1), Color(1, 1, 1, 1), Color(0.796078, 0, 0.780392, 1), Color(1, 1, 1, 1), Color(0.796078, 0, 0.780392, 1), Color(1, 1, 1, 1)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"set_invincible"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_ineaq"]
 resource_name = "initial_position"
@@ -238,6 +253,7 @@ transitions = ["Start", "initial_position", SubResource("AnimationNodeStateMachi
 graph_offset = Vector2(-26, -116)
 
 [node name="Boss" type="Node2D"]
+script = ExtResource("1_lw2jc")
 
 [node name="Visual" type="Node2D" parent="."]
 
@@ -277,3 +293,6 @@ tree_root = SubResource("AnimationNodeStateMachine_7r7ui")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/on_hit = false
 parameters/conditions/on_trigger = false
+
+[connection signal="area_entered" from="Visual/HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_entered" from="Trigger" to="." method="_on_trigger_area_entered"]

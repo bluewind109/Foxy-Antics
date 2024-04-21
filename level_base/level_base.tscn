@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqoeu7pr1xvmm"]
+[gd_scene load_steps=9 format=3 uid="uid://cqoeu7pr1xvmm"]
 
 [ext_resource type="Texture2D" uid="uid://ehxev7ut3l5n" path="res://assets/tiles/Terrain (16x16).png" id="1_2dfj2"]
 [ext_resource type="Script" path="res://level_base/level_base.gd" id="1_5128b"]
 [ext_resource type="PackedScene" uid="uid://bvtndiildrdct" path="res://player_camera/player_camera.tscn" id="2_mp0i7"]
 [ext_resource type="PackedScene" uid="uid://bfsovpbkbd7p1" path="res://player/player.tscn" id="3_r1jgr"]
 [ext_resource type="PackedScene" uid="uid://cjsg5236f3qek" path="res://moving_platform/moving_platform.tscn" id="5_n1ylw"]
-[ext_resource type="PackedScene" uid="uid://j3lwl0xrx0r7" path="res://ball_spikes/ball_spikes.tscn" id="6_lujoc"]
+[ext_resource type="PackedScene" uid="uid://cs6geqpjakirk" path="res://floor_spikes/floor_spikes.tscn" id="6_1jh1u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ow75y"]
 texture = ExtResource("1_2dfj2")
@@ -563,12 +563,6 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_ow75y")
 
-[sub_resource type="Curve2D" id="Curve2D_lp8tj"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 894, -67, -52.9167, 37.1677, 52.9167, -37.1677, 894, -211, -22.0486, -58.5863, 22.0486, 58.5863, 988, -213, 0, 0, 0, 0, 894, -67)
-}
-point_count = 4
-
 [node name="LevelBase" type="Node2D"]
 position = Vector2(2, -1)
 script = ExtResource("1_5128b")
@@ -600,10 +594,5 @@ position = Vector2(50, -140)
 
 [node name="Paths" type="Node" parent="."]
 
-[node name="Spikes1" type="Path2D" parent="Paths"]
-position = Vector2(3, -7)
-curve = SubResource("Curve2D_lp8tj")
-
-[node name="BallSpikes" parent="Paths/Spikes1" instance=ExtResource("6_lujoc")]
-position = Vector2(894, -67)
-rotation = -1.5708
+[node name="FloorSpikes" parent="." instance=ExtResource("6_1jh1u")]
+position = Vector2(263, -15)

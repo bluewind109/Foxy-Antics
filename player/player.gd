@@ -10,12 +10,13 @@ class_name Player
 @onready var animation_player_invincible = $AnimationPlayerInvincible
 @onready var invincible_timer = $InvincibleTimer
 @onready var sound_damage = $SoundDamage
+@onready var hurt_timer = $HurtTimer
 
 const GRAVITY: float = 1000.0
 const RUN_SPEED: float = 120.0
 const MAX_FALL_SPEED: float = 400.0
-const HURT_TIME: float = 0.3
 const JUMP_VELOCITY: float = -400.0
+const HURT_JUMP_VELOCITY: Vector2 = Vector2(0,-150.0)
 
 enum PLAYER_STATE { IDLE, RUN, JUMP, FALL, HURT }
 var _state = PLAYER_STATE.IDLE
@@ -53,6 +54,8 @@ func shoot() -> void:
 		shooter.shoot(Vector2.RIGHT)
 
 func get_input() -> void:
+	if (_state == PLAYER_STATE.HURT): return
+	
 	velocity.x = 0
 	
 	if (Input.is_action_pressed("left") == true):
@@ -72,8 +75,7 @@ func get_input() -> void:
 
 
 func calculate_states() -> void:
-	if (_state == PLAYER_STATE.HURT):
-		return
+	if (_state == PLAYER_STATE.HURT): return
 		
 	if (is_on_floor() == true):
 		if (velocity.x == 0):
@@ -106,7 +108,15 @@ func set_state(new_state: PLAYER_STATE) -> void:
 			animation_player.play("jump")
 		PLAYER_STATE.FALL:
 			animation_player.play("fall")
+		PLAYER_STATE.HURT:
+			animation_player.play("hurt")
+			velocity = HURT_JUMP_VELOCITY
+			hurt_timer.start()
 			
+
+func apply_hurt_jump() -> void:
+	set_state(PLAYER_STATE.HURT)
+
 
 func go_invincible() -> void:
 	_invincible = true
@@ -118,6 +128,7 @@ func apply_hit() -> void:
 	if (_invincible == true): return
 	
 	go_invincible()
+	apply_hurt_jump()
 	SoundManager.play_clip(sound_damage, SoundManager.SOUND_DAMAGE)
 
 
@@ -128,3 +139,7 @@ func _on_hit_box_area_entered(area):
 func _on_invincible_timer_timeout():
 	_invincible = false
 	animation_player_invincible.stop()
+
+
+func _on_hurt_timer_timeout():
+	set_state(PLAYER_STATE.IDLE)

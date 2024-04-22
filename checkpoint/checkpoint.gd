@@ -17,4 +17,4 @@ func on_boss_killed(_p: int) -> void:
 
 
 func _on_area_entered(area):
-	print("Level Complete")
+	SignalManager.on_level_complete.emit()

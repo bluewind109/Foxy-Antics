@@ -17,6 +17,7 @@ const RUN_SPEED: float = 360.0
 const MAX_FALL_SPEED: float = 400.0
 const JUMP_VELOCITY: float = -400.0
 const HURT_JUMP_VELOCITY: Vector2 = Vector2(0,-150.0)
+const FALLEN_OFF: float = 100.0
 
 enum PLAYER_STATE { IDLE, RUN, JUMP, FALL, HURT }
 var _state = PLAYER_STATE.IDLE
@@ -28,6 +29,8 @@ func _ready():
 	
 	
 func _physics_process(delta):
+	fallen_off()
+	
 	if (is_on_floor() == false):
 		velocity.y += GRAVITY * delta
 		
@@ -48,6 +51,13 @@ func update_debug_label() -> void:
 		PLAYER_STATE.keys()[_state], _life
 	]
 	debug_label.text += "\n%.0f, %.0f" % [velocity.x, velocity.y]
+
+
+func fallen_off() -> void:
+	if (global_position.y < FALLEN_OFF): return
+	
+	_life = 1
+	reduce_life()
 
 
 func shoot() -> void:

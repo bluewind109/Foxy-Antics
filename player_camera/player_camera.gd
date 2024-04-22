@@ -7,6 +7,7 @@ extends Camera2D
 func _ready():
 	set_process(false)
 	SignalManager.on_player_hit.connect(on_player_hit)
+	SignalManager.on_game_over.connect(on_game_over)
 
 
 func _process(_delta):
@@ -25,12 +26,20 @@ func shake() -> void:
 	shake_timer.start()
 
 
+func reset_camera() -> void:
+	set_process(false)
+	offset = Vector2.ZERO
+
+
 func on_player_hit(_lives: int) -> void:
 	shake()
 
 
+func on_game_over() -> void:
+	reset_camera()
+
+
 func _on_shake_timer_timeout():
-	set_process(false)
-	offset = Vector2.ZERO
+	reset_camera()
 
 

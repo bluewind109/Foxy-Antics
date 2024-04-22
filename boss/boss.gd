@@ -14,10 +14,6 @@ var _invincible: bool = false
 
 func _ready():
 	pass
-	
-
-func _process(delta):
-	pass
 
 
 func tween_hit() -> void:
@@ -27,16 +23,13 @@ func tween_hit() -> void:
 
 func reduce_lives() -> void:
 	lives -= 1
-	print("boss reduce lives: ", lives)
 	if (lives <= 0):
 		SignalManager.on_boss_killed.emit(points)
-		print("boss dead")
 		set_process(false)
 		queue_free()
 
 
 func set_invincible(val: bool) -> void:
-	print("set_invincible: ", val)
 	_invincible = val
 	animation_tree[HIT_CONDITION] = val
 
@@ -49,10 +42,10 @@ func take_damage() -> void:
 	reduce_lives()
 
 
-func _on_trigger_area_entered(area):
+func _on_trigger_area_entered(_area):
 	if (animation_tree[TRIGGER_CONDITION] == false):
 		animation_tree[TRIGGER_CONDITION] = true
 
 
-func _on_hit_box_area_entered(area):
+func _on_hit_box_area_entered(_area):
 	take_damage()

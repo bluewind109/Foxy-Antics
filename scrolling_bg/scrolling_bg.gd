@@ -71,7 +71,6 @@ func add_layer(t: Texture2D, time_offset: float) -> void:
 
 
 func add_bgs() -> void:
-	print(level_number)
 	var inc = get_increment()
 	var time_offset = inc
 	var files_list = BG_FILES[level_number]

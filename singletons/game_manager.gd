@@ -16,7 +16,7 @@ func init_level_scenes() -> void:
 	for ln in range(TOTAL_LEVELS):
 		_level_scenes[ln+1] = load("res://level_base/levels/level_%s.tscn" % (ln + 1))
 
-		
+
 func load_main_scene() -> void:
 	_current_level = 0
 	ScoreManager.reset_score()

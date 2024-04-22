@@ -17,15 +17,17 @@ var _dying: bool = false
 
 func _ready():
 	_player_ref = get_tree().get_nodes_in_group(GameManager.GROUP_PLAYER)[0]
-	
-	
+
+
 func _physics_process(_delta):
 	fallen_off()
-	
+
+
 func fallen_off() -> void:
 	if (global_position.y > OFF_SCREEN_KILL_ME):
 		queue_free()
-		
+
+
 func die() -> void:
 	if (_dying == true): return
 	

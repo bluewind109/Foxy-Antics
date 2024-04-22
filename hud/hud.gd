@@ -28,7 +28,7 @@ func _process(delta):
 
 
 func set_text_score(score: int) -> void:
-	score_label.text = str(score)
+	score_label.text = str(score).lpad(4, "0")
 
 	
 func show_hud() -> void:
@@ -51,7 +51,8 @@ func on_game_over() -> void:
 	vb_game_over.visible = true
 
 
-func on_score_updated(score: int) -> void:
+func on_score_updated() -> void:
+	var score = ScoreManager.get_score()
 	set_text_score(score)
 
 

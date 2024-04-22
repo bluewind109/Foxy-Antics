@@ -18,10 +18,9 @@ func _ready():
 
 func update_score(points: int) -> void:
 	_score += points
-	SignalManager.on_score_updated.emit(_score)
+	SignalManager.on_score_updated.emit()
 	if (_highscore < _score):
 		_highscore = _score
-	print("update score: ", _score)
 		
 		
 func get_score() -> int:
@@ -44,7 +43,6 @@ func save_highscore() -> void:
 	}
 	
 	file.store_string(JSON.stringify(data))
-	print("saved _highscore: ", data)
 
 
 func load_highscore() -> void:
@@ -54,10 +52,8 @@ func load_highscore() -> void:
 	var file = FileAccess.open(HS_FILE, FileAccess.READ)
 	var data = JSON.parse_string(file.get_as_text())
 
-	print("data: ", data)
 	if (HS_KEY in data):
 		_highscore = data[HS_KEY]
-		print("loaded _highscore: ", _highscore)
 	
 	
 func on_boss_killed(points: int) -> void:

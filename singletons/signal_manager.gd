@@ -6,5 +6,5 @@ signal on_boss_killed(points: int)
 signal on_player_hit(lives: int)
 signal on_level_complete()
 signal on_game_over()
-signal on_score_updated(score: int)
+signal on_score_updated()
 

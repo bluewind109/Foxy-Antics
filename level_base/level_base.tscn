@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqoeu7pr1xvmm"]
+[gd_scene load_steps=16 format=3 uid="uid://cqoeu7pr1xvmm"]
 
 [ext_resource type="Texture2D" uid="uid://ehxev7ut3l5n" path="res://assets/tiles/Terrain (16x16).png" id="1_2dfj2"]
 [ext_resource type="Script" path="res://level_base/level_base.gd" id="1_5128b"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://djbd3dmgwhlfe" path="res://assets/backgrounds/game_background_1/layers/clouds_3.png" id="8_cehps"]
 [ext_resource type="PackedScene" uid="uid://lgfwk6k063k" path="res://scrolling_bg/scrolling_bg.tscn" id="9_ivy8m"]
 [ext_resource type="Texture2D" uid="uid://cwacyr5irt3mj" path="res://assets/backgrounds/game_background_1/layers/clouds_4.png" id="10_2qt88"]
+[ext_resource type="PackedScene" uid="uid://b587jxlxycvr8" path="res://enemy/snail/snail.tscn" id="13_ulhaj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ow75y"]
 texture = ExtResource("1_2dfj2")
@@ -662,3 +663,6 @@ position = Vector2(177, -42)
 position = Vector2(50, -140)
 
 [node name="Paths" type="Node" parent="."]
+
+[node name="Snail" parent="." instance=ExtResource("13_ulhaj")]
+position = Vector2(131, -33)

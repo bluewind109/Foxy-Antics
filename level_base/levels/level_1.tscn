@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwu0pmytnwqqy"]
+[gd_scene load_steps=4 format=3 uid="uid://bwu0pmytnwqqy"]
 
 [ext_resource type="PackedScene" uid="uid://cqoeu7pr1xvmm" path="res://level_base/level_base.tscn" id="1_ph5l2"]
 [ext_resource type="PackedScene" uid="uid://b587jxlxycvr8" path="res://enemy/snail/snail.tscn" id="2_ra57r"]
+[ext_resource type="PackedScene" uid="uid://cs6geqpjakirk" path="res://floor_spikes/floor_spikes.tscn" id="3_0hfu4"]
 
 [node name="Level1" instance=ExtResource("1_ph5l2")]
 
@@ -10,3 +11,6 @@ layer_0/tile_data = PackedInt32Array(-16, 458752, 0, -15, 458752, 0, -14, 458752
 
 [node name="Snail" parent="." index="10" instance=ExtResource("2_ra57r")]
 position = Vector2(274, -27)
+
+[node name="FloorSpikes" parent="." index="11" instance=ExtResource("3_0hfu4")]
+position = Vector2(116, -13)

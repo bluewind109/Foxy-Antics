@@ -27,7 +27,7 @@ _data = {
 "spin": SubResource("Animation_t5uob")
 }
 
-[node name="BallSpikes" type="PathFollow2D"]
+[node name="BallSpikes" type="PathFollow2D" groups=["danger"]]
 script = ExtResource("1_h8tqr")
 
 [node name="HitBox" type="Area2D" parent="."]

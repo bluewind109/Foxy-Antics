@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://enemy/enemy_base/enemy_base.gd" id="1_y1f7r"]
 
-[node name="EnemyBase" type="CharacterBody2D"]
+[node name="EnemyBase" type="CharacterBody2D" groups=["danger"]]
 collision_layer = 0
 script = ExtResource("1_y1f7r")
 
